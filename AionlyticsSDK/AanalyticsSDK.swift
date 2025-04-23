@@ -19,16 +19,27 @@ internal class ManagerInitializer {
 public class AnalyticsSDK {
     
     public static let shared = AnalyticsSDK()
-    
     private var managerInitiliazer: ManagerInitializer!
+    
+    //MARK: Plugins
+    private let firebase = FirebaseAnalyticsPlugin()
+    // private let mixPanel = MixplanelAnalyticsPlugin()
+    // private let oneSignal = OneSignalAnalyticsPlugin()
+    // private let customLogger = CustomLoggerPlugin()
     
     private init () {
         self.managerInitiliazer = ManagerInitializer()
     }
     
     public func start() {
-        let firebase = FirebaseAnalyticsPlugin()
         managerInitiliazer.analyticsManager.register(plugin: firebase)
+        //managerInitiliazer.analyticsManager.register(plugin: mixPanel)
+        //managerInitiliazer.analyticsManager.register(plugin: oneSignal)
+        //managerInitiliazer.analyticsManager.register(plugin: customLogger)
+    }
+    
+    public func stop() {
+        managerInitiliazer.analyticsManager.stop(trace: "firebase")
     }
 }
 
