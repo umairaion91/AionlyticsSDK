@@ -1,5 +1,5 @@
 //
-//  AionlyticsHttpMetric.swift
+//  AnalyticsHttpMetric.swift
 //  AionlyticsSDK
 //
 //  Created by Admin on 18/04/2025.
@@ -8,11 +8,11 @@
 import Foundation
 import Network
 
-public protocol AionlyticsHttpMetricListner {
-    func complete(httpMetric: AionlyticsHttpMetric)
+public protocol AnalyticsHttpMetricListner {
+    func complete(httpMetric: AnalyticsHttpMetric)
 }
 
-public class AionlyticsHttpMetric {
+public class AnalyticsHttpMetric {
     
     public let url: String
     public let method: String // HTTP Method
@@ -20,7 +20,7 @@ public class AionlyticsHttpMetric {
     public var durration: Float = 0.0
     
     private var startTime: Date
-    private var listeners = [AionlyticsHttpMetricListner]()
+    private var listeners = [AnalyticsHttpMetricListner]()
     
     //DataRequest
     internal convenience init(request: String) {
@@ -47,7 +47,7 @@ public class AionlyticsHttpMetric {
         }
     }
     
-    public func register(listener: AionlyticsHttpMetricListner) {
+    public func register(listener: AnalyticsHttpMetricListner) {
         listeners.append(listener)
     }
 }

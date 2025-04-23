@@ -8,15 +8,15 @@
 import Foundation
 
 
-public class BaseAionlyticsPlugin: AionlyticsPlugin {
+public class BaseAnalyticsPlugin: AnalyticsPlugin {
     
-    public func start(httpMetrics: AionlyticsHttpMetric) { }
+    public func start(httpMetrics: AnalyticsHttpMetric) { }
     
     public func start(trace name: String) { }
     
     public func stop(trace name: String) { }
     
-    public func track(event: AionlyticsEvent, params: any AionlyticsParams) { }
+    public func track(event: AnalyticsEvent, params: any AnalyticsParams) { }
     
     public func name() -> String {
         fatalError("Must Override BaseAionlyticsPlugin Name")

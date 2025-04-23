@@ -1,5 +1,5 @@
 //
-//  AionlyticsSDK.swift
+//  AnalyticsManager.swift
 //  AionlyticsSDK
 //
 //  Created by Admin on 18/04/2025.
@@ -7,26 +7,26 @@
 
 import Foundation
 
-public class AionlyticsSDKManager {
+public class AnalyticsManager {
     
     //MARK: All Your Plugins
     /// Firebase, OneSignal, custom Event Loger Plugins
-    private var plugins = [AionlyticsPlugin]()
+    private var plugins = [AnalyticsPlugin]()
     
     //MARK:  Register the plugin for analytics
-    public func register(plugin: AionlyticsPlugin) {
+    public func register(plugin: AnalyticsPlugin) {
         plugins.append(plugin)
     }
     
     //MARK: Start analytics plugins
-    internal func start() -> AionlyticsHttpMetric {
-        let metric = AionlyticsHttpMetric(request: "Request to intialise")
+    internal func start() -> AnalyticsHttpMetric {
+        let metric = AnalyticsHttpMetric(request: "Request to intialise")
         self.start(httpMetric: metric)
         return metric
     }
     
     //MARK: Start HTTP Metrics for analytics plugins
-    internal func start(httpMetric: AionlyticsHttpMetric) {
+    internal func start(httpMetric: AnalyticsHttpMetric) {
         for plugin in plugins {
             plugin.start(httpMetrics: httpMetric)
         }
@@ -47,7 +47,7 @@ public class AionlyticsSDKManager {
     }
     
     //MARK: Track events for analytics plugins
-    public func track(event: AionlyticsEvent, params: AionlyticsParams) {
+    public func track(event: AnalyticsEvent, params: AnalyticsParams) {
         for plugin in plugins {
             plugin.track(event: event, params: params)
         }
