@@ -7,39 +7,38 @@
 
 import Foundation
 
-internal class ManagerInitializer {
-    
-    internal var analyticsManager: AnalyticsManager!
-    
-    init() {
-        self.analyticsManager = AnalyticsManager()
-    }
-}
-
 public class AnalyticsSDK {
     
     public static let shared = AnalyticsSDK()
     private var managerInitiliazer: ManagerInitializer!
+    private var ready:Bool = false
+    private var loadInProgress:Bool = false
     
-    //MARK: Plugins
-    private let firebase = FirebaseAnalyticsPlugin()
-    // private let mixPanel = MixplanelAnalyticsPlugin()
-    // private let oneSignal = OneSignalAnalyticsPlugin()
-    // private let customLogger = CustomLoggerPlugin()
+    
+    /**
+     Initialiazes the SDK with the given environment
+     - parameter environment: Environment to use
+     - parameter appContext: Application launch parameters
+     */
+    
+    public func initialize(environment:Environment, appContext:AppContext?) {
+        if ready || loadInProgress {
+            print("SDK is already initialized")
+            return
+        }
+        self.managerInitiliazer = ManagerInitializer(environment: environment, appContext: appContext)
+    }
     
     private init () {
-        self.managerInitiliazer = ManagerInitializer()
+       
     }
     
     public func start() {
-        managerInitiliazer.analyticsManager.register(plugin: firebase)
-        //managerInitiliazer.analyticsManager.register(plugin: mixPanel)
-        //managerInitiliazer.analyticsManager.register(plugin: oneSignal)
-        //managerInitiliazer.analyticsManager.register(plugin: customLogger)
+        self.managerInitiliazer.reigsterPlugins()
     }
     
     public func stop() {
-        managerInitiliazer.analyticsManager.stop(trace: "firebase")
+        
     }
 }
 
