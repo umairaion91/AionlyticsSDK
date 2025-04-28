@@ -14,6 +14,25 @@ public enum MainParam: String, AnalyticsParam {
     case deviceUID     = "device_uuid"
 }
 
+/**
+ Usage: You can always Wrap the Main params as below
+ 
+ public class Params: MainParams  {
+ 
+     public convenience init(_ key: Param, value: Any) {
+         self.init()
+         set(key, value: value)
+     }
+     
+     public func set(_ key: Param, value: Any) {
+         super.set(key, value: value)
+     }
+ }
+ 
+ Declaration:  let parameters = Params()
+ parameters.set(FirebaseProperties.Name, value: Screen.Name.rawValue)
+ AnalyticsEvent.click(action).track(parameters)
+*/
 open class MainParams: AnalyticsParams {
     
     public convenience init(_ key: MainParam, value: Any) {
